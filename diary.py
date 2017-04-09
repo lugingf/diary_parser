@@ -22,7 +22,7 @@ def diary(login, password):
 	while not connected and attempt < maxattempt:
 		try:
 			print('Trying to connect')
-			auth_req = session.get(auth_url, headers=headers, params={"login":'002361161390', "password":'075c88a8c7b95dca264e13cf8b3bab35'}, allow_redirects=False)
+			auth_req = session.get(auth_url, headers=headers, params={"login":login, "password":password}, allow_redirects=False)
 			connected = True
 		except requests.exceptions.ConnectionError:
 			attempt +=1
@@ -67,8 +67,9 @@ def diary(login, password):
 	return final_ans
 		
 if __name__ == '__main__':
-	week_data = diary()
-	
+	password = md5.(password).hexdigest
+	week_data = diary(login, password)
+	store_data(result_file_name, week_data)
 	print('Opening result data in your default browser...')
 	webbrowser.open(result_file_name)
 		
