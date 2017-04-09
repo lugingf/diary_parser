@@ -1,9 +1,18 @@
 import requests
 import webbrowser
+from hashlib import md5
+from settings import login, password, result_file_name
 from bs4 import BeautifulSoup
 
+def store_data(filename, week_data):
+	with open(filename, 'w') as f:
+		for d in week_data:
+			txt = '<div>' + d + '</div>'
+			f.write(txt)
+		print('Data stored at {}'.format(filename))
 
-def diary():
+		
+def diary(login, password):
 	session = requests.Session()
 	headers = {'Referer': 'https://www.mos.ru/pgu/ru/application/dogm/journal/'}
 	auth_url = "https://mrko.mos.ru/dnevnik/services/index.php"
@@ -13,7 +22,7 @@ def diary():
 	while not connected and attempt < maxattempt:
 		try:
 			print('Trying to connect')
-			auth_req = session.get(auth_url, headers=headers, params={"login":login, "password":MD5_PASSWORD}, allow_redirects=False)
+			auth_req = session.get(auth_url, headers=headers, params={"login":'002361161390', "password":'075c88a8c7b95dca264e13cf8b3bab35'}, allow_redirects=False)
 			connected = True
 		except requests.exceptions.ConnectionError:
 			attempt +=1
@@ -58,13 +67,8 @@ def diary():
 	return final_ans
 		
 if __name__ == '__main__':
-	result_fl_name = 'DIAR.html'
 	week_data = diary()
-	with open(result_fl_name, 'w', encoding='utf-8') as f:
-		for d in week_data:
-			txt = '<div>' + d + '</div>'
-			f.write(txt)
-		print('Data stored at {}'.format(result_fl_name))
+	
 	print('Opening result data in your default browser...')
-	webbrowser.open(result_fl_name)
+	webbrowser.open(result_file_name)
 		
