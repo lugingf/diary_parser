@@ -67,7 +67,7 @@ def diary(login, password):
 	return final_ans
 		
 if __name__ == '__main__':
-	password = md5.(password).hexdigest
+	password = md5(password.encode()).hexdigest()
 	week_data = diary(login, password)
 	store_data(result_file_name, week_data)
 	print('Opening result data in your default browser...')
