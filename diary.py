@@ -53,7 +53,7 @@ def diary(login, password):
 					pass
 				else:
 					lesson_dz = lesson_columns[2].find("div", "b-dl-td-hw-section").span.text
-					lesson_mark = lesson_columns[3].span.text[0:1]
+					lesson_mark = lesson_columns[3].span.text  #[0:1]
 					lesson_comment = lesson_columns[4].find("div", "b-dl-td-hw-comments").span.text
 					final_ans.append(
 											"<b>{0}. {1}</b>. Домашнее задание:\n"
