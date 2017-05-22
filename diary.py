@@ -30,6 +30,8 @@ def diary(login, password):
 		else:
 			print('Connected')
 	main_req = session.get("https://mrko.mos.ru/dnevnik/services/dnevnik.php?r=1&first=1")
+	#  https://mrko.mos.ru/dnevnik/services/dnevnik.php?r=3&j=3  где j=[1-3] в зависимости от периода
+	#  https://mrko.mos.ru/dnevnik/services/dnevnik.php?next=2017-05-15  где 2017-05-15 - дата старта нужной недели
 	parsed_html = BeautifulSoup(main_req.content, 'lxml')
 	columns = parsed_html.body.find_all('div', 'b-diary-week__column')
 	final_ans = []
